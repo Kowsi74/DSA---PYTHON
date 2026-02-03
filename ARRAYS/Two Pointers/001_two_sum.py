@@ -1,14 +1,3 @@
-"
-
-
-
-
-"
-
-
-
-
-
 """The problem asks us to find two indices in a sorted array such that their sum equals the target, and return the indices in 1-based format.
 
 Initially, I made the mistake of overchecking the sum and not fully trusting the two-pointer approach.
@@ -30,7 +19,7 @@ The problem guarantees one solution, so we return as soon as we find it."""
 def twoSum(self, numbers: List[int], target: int) -> List[int]:
         left = 0
         right = len(numbers)-1
-        if len(numbers) < 2:
+        if len(numbers) < 2: 
             return 
         while left < right :
             current_sum = numbers[left] + numbers[right]
