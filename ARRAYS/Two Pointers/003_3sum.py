@@ -1,15 +1,14 @@
 """The problem asks for all unique triplets whose sum is zero.
-A brute-force approach would take O(n³), so we optimize using sorting and the two-pointer technique.
 
-First, we sort the array so duplicates are grouped and pointer movement becomes predictable.
-Then, we fix one element using a for loop. For the remaining part of the array, we use two pointers—one starting just after the fixed element and one at the end.
+I first sort the array, which helps me use the two-pointer technique and handle duplicates easily.
 
-Depending on the sum, we move the pointers inward. If the sum is zero, we store the triplet, move both pointers, and skip duplicates to avoid repeating the same triplet.
+I fix one element using a loop, and for the remaining part of the array, I use two pointers to find pairs that sum to the negative of the fixed value.
 
-We also skip duplicate fixed values to ensure uniqueness.
+If the sum is too small, I move the left pointer to increase it; if the sum is too large, I move the right pointer to decrease it.
 
-The overall time complexity is O(n²), which is optimal for this problem."""
+I skip duplicate values for the fixed element and also for the left and right pointers to avoid repeated triplets.
 
+This approach runs in O(n²) time and uses O(1) extra space."""
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
