@@ -1,36 +1,51 @@
-"""The problem asks us to find two indices in a sorted array such that their sum equals the target, and return the indices in 1-based format.
+"""
+    for this problem they asking if the sum of two values in the array
+    is equal to the target return the index of that two values
+    so frst the brute force approach is using nested loops and 
+    iterate through the loops and checking but it takes o(n^2) in time and o(1) in space
+"""
+def twosum(nums,target):
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            if nums[i] + nums[j] == target :
+                return [i,j]
+    
+    
+"""
+    next approach is sorting first and using two pointer but  sorting before always
+    think about original indices where they was ask output as original indices
+    so we create one list inside we create one tuple to safe the original indices and after we 
+    areget using two pointers and the output it n times we iterate creating list takes o(n) and sort takes o(n log n )
+    and two pointer takes o(n) so overall it takes o(n log n) in time and o(n) in space 
+"""       
+def twosum(nums,target):
+    arr = [(num , i) for i , num in enumerate(nums)]
+    arr.sort()
+    left = 0 
+    right = len(arr)-1
+    while left < right:
+        current_sum = arr[left][0] + arr[right][0]
+        if current_sum == target:
+            return [arr[left][1],arr[right][1]]
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1  
+            
+"""
+    the final appraoch is using hash map which is optimal one 
+    in this i create one dictionary and using enumerate to manage the original indices
+    iterate through array and calculating diff of target with value 
+    if the diff is already in dict it will return the current index and the dict(index)
+    it will take o(n) in time and o(n) in space 
+"""            
 
-Initially, I made the mistake of overchecking the sum and not fully trusting the two-pointer approach.
-
-A brute-force solution would be to use two nested loops and check every pair, which takes O(n²) time. This is not optimal.
-
-Since the array is sorted, we can optimize using the two-pointer technique. I place one pointer at the start and one at the end.
-
-On each iteration, I compute the current sum. If it equals the target, I return the indices. If the sum is greater than the target, I move the right pointer left to reduce the sum. If the sum is smaller, I move the left pointer right to increase the sum.
-
-This works because the array is sorted and pointer movement predictably changes the sum.
-
-The time complexity is O(n) since each pointer moves at most n times, and the space complexity is O(1).
-
-The problem guarantees one solution, so we return as soon as we find it."""
-
-
-
-def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        left = 0
-        right = len(numbers)-1
-        if len(numbers) < 2: 
-            return 
-        while left < right :
-            current_sum = numbers[left] + numbers[right]
-            if current_sum == target:
-                return [left + 1 , right + 1]
-            elif current_sum > target :
-               right -=1
-            elif current_sum < target :
-               left += 1 
-               
-               
-
+def two_sum(nums,target):
+    seen = {}
+    for i , num in enumerate(nums):
+        diff = target - num
+        if diff in seen:
+            return[seen[diff], i]
+        seen[num] = i
         
     
